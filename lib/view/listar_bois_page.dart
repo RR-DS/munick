@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:munick/main.dart';
 import 'package:munick/model/boi.dart';
+import 'package:munick/repositories/boi_repository.dart';
 import 'package:munick/view/editar_boi_page.dart';
 
 //LISTARBOIPAGE
@@ -36,13 +37,34 @@ class _ListarBoisState extends State<ListarBoisPage> {
 
   Future<List<Boi>> _obterTodos() async {
     //Banco de dados buscar as Informações
-    return <Boi>[
-      Boi(1, "nome", "raca", 10), //dar uma olhada aqui
-    ];
+    List<Boi> tempLista = <Boi>[];
+    try {
+      BoiRepository repository = BoiRepository();
+      tempLista = await repository.buscarTodos();
+    } catch (exception) {
+      showError(context, "Erro obtendo lista de bois", exception.toString());
+    }
+
+    return tempLista;
+
+    //<Boi>[
+    //  Boi(1, "nome", "raca", 10), //dar uma olhada aqui
+    //];
   }
 
 //REMOVEBOI
-  void _removerBoi(int id) async {}
+  void _removerBoi(int id) async {
+    try {
+      BoiRepository repository = BoiRepository();
+      await repository.remover(id);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Boi $id removido com sucesso')));
+    } catch (exception) {
+      showError(context, "Erro removendo boi", exception.toString());
+    }
+  }
+
 //SHOWITEM
 
   void _showItem(BuildContext context, int index) {
