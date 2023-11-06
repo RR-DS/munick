@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:munick/main.dart';
 import 'package:munick/model/boi.dart';
+import 'package:munick/repositories/boi_repository.dart';
 
 class EditarBoiPage extends StatefulWidget {
   static const String routeName = '/edit';
@@ -25,14 +26,28 @@ class _EditarBoiState extends State<EditarBoiPage> {
     super.dispose();
   }
 
-  void _obterBoi() async {
+//OBTER ANTIGO - SEM REST
+  /*void _obterBoi() async {
     this._boi = Boi(this._id, "Boi ${this._id}", "Raça", 10);
     _nomeController.text = this._boi!.nome;
     _racaController.text = this._boi!.raca;
     _idadeController.text = this._boi!.idade.toString();
+  }*/
+  //OBTER NOVO - COM REST
+  void _obterBoi() async {
+    try {
+      BoiRepository repository = BoiRepository();
+      this._boi = await repository.buscar(this._id);
+      _nomeController.text = this._boi!.nome;
+      _racaController.text = this._boi!.raca;
+      _idadeController.text = this._boi!.idade.toString();
+    } catch (exception) {
+      showError(context, "Erro recuperando boi", exception.toString());
+      Navigator.pop(context);
+    }
   }
-
-  void _salvar() async {
+//SALVAR ANTIGO - SEM REST
+  /* void _salvar() async {
     this._boi!.nome = _nomeController.text;
     this._boi!.raca = _racaController.text;
     this._boi!.idade = int.parse(_idadeController.text);
@@ -40,6 +55,25 @@ class _EditarBoiState extends State<EditarBoiPage> {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text('Boi editado com sucesso.')));
   }
+  */
+
+//SALVAR NOVO - COM REST
+  void _salvar() async {
+    this._boi!.nome = _nomeController.text;
+    this._boi!.raca = _racaController.text;
+    this._boi!.idade = int.parse(_idadeController.text);
+
+    try {
+      BoiRepository repository = BoiRepository();
+      await repository.alterar(this._boi!);
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Boi editado com sucesso')));
+    } 
+
+catch (exception) {
+      showError(context, "Erro esditando boi", exception.toString());
+    }
+    
 
   Widget _buildForm(BuildContext context) {
     return Column(children: [
