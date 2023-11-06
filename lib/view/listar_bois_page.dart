@@ -65,8 +65,8 @@ class _ListarBoisState extends State<ListarBoisPage> {
     }
   }
 
-//SHOWITEM
-
+//SHOWITEM ANTIGO
+/*
   void _showItem(BuildContext context, int index) {
     Boi boi = _lista[index];
     showDialog(
@@ -89,6 +89,43 @@ class _ListarBoisState extends State<ListarBoisPage> {
                     })
               ]);
         }));
+  }
+*/
+
+//SHOWITEM NOVO
+  void _showItem(BuildContext context, int index) {
+    Boi boi = _lista[index];
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Text(boi.nome),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(children: [
+                    Icon(Icons.create),
+                    Text("Nome: ${boi.nome}")
+                  ]),
+                  Row(children: [
+                    Icon(Icons.assistant_photo),
+                    Text("Raça: ${boi.raca}")
+                  ]),
+                  Row(children: [
+                    Icon(Icons.cake),
+                    Text("Idade: ${boi.idade} anos")
+                  ]),
+                ],
+              ),
+              actions: [
+                TextButton(
+                    child: Text("OK"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    })
+              ]);
+        });
   }
 
 //EDITITEM
