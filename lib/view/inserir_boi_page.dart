@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:munick/main.dart';
 import 'package:munick/model/boi.dart';
 import 'package:munick/repositories/boi_repository.dart';
+import '../helper/error.dart';
 
 class InserirBoiPage extends StatefulWidget {
   static const String routeName = '/insert';

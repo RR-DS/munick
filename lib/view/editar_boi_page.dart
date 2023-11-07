@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:munick/main.dart';
 import 'package:munick/model/boi.dart';
 import 'package:munick/repositories/boi_repository.dart';
+import '../helper/error.dart';
 
 class EditarBoiPage extends StatefulWidget {
   static const String routeName = '/edit';
@@ -68,12 +69,10 @@ class _EditarBoiState extends State<EditarBoiPage> {
       await repository.alterar(this._boi!);
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Boi editado com sucesso')));
-    } 
-
-catch (exception) {
+    } catch (exception) {
       showError(context, "Erro esditando boi", exception.toString());
     }
-    
+  }
 
   Widget _buildForm(BuildContext context) {
     return Column(children: [
@@ -160,3 +159,7 @@ catch (exception) {
     );
   }
 }
+
+
+
+//falta met show erro pg523

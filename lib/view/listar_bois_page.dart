@@ -3,6 +3,7 @@ import 'package:munick/main.dart';
 import 'package:munick/model/boi.dart';
 import 'package:munick/repositories/boi_repository.dart';
 import 'package:munick/view/editar_boi_page.dart';
+import '../helper/error.dart';
 
 //LISTARBOIPAGE
 class ListarBoisPage extends StatefulWidget {

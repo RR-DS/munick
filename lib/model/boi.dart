@@ -19,3 +19,4 @@ class Boi {
 
   String toJson() => jsonEncode(toMap());
 }
+//POR FROM MAP E TOP MAP
