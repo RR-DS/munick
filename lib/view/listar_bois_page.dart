@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:munick/dao/boi_dao.dart';
+import 'package:munick/dao/connection_factory.dart';
 import 'package:munick/main.dart';
 import 'package:munick/model/boi.dart';
 import 'package:munick/repositories/boi_repository.dart';
@@ -38,13 +40,19 @@ class _ListarBoisState extends State<ListarBoisPage> {
 
   Future<List<Boi>> _obterTodos() async {
     //Banco de dados buscar as Informações
-    List<Boi> tempLista = <Boi>[];
+    Database db = await ConennectionFactory.factory.database;
+    BoiDAO = Boi(db);
+
+    List<Boi> tempLista = await dao.obterTodos();
+    ConennectionFactory.factory.close();
+
+    /*List<Boi> tempLista = <Boi>[];
     try {
       BoiRepository repository = BoiRepository();
       tempLista = await repository.buscarTodos();
     } catch (exception) {
       showError(context, "Erro obtendo lista de bois", exception.toString());
-    }
+    }*/
 
     return tempLista;
 
@@ -55,15 +63,21 @@ class _ListarBoisState extends State<ListarBoisPage> {
 
 //REMOVEBOI
   void _removerBoi(int id) async {
+    Database db = await ConennectionFactory.factory.database;
+    BoiDAO dao = BoiDAO(db);
+    await dao.remover(id);
+    /*
+
     try {
       BoiRepository repository = BoiRepository();
       await repository.remover(id);
-
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Boi $id removido com sucesso')));
     } catch (exception) {
       showError(context, "Erro removendo boi", exception.toString());
     }
+*/
+    ConennectionFactory.factory.close();
   }
 
 //SHOWITEM ANTIGO
