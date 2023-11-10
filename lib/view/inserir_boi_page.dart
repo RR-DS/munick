@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:munick/dao/connection_factory.dart';
 import 'package:munick/main.dart';
 import 'package:munick/model/boi.dart';
 import 'package:munick/repositories/boi_repository.dart';
@@ -39,6 +40,9 @@ class _InserirBoiState extends State<InserirBoiPage> {
 */
   //SALVAR - INT COM BANCO - NOVO
 
+/*
+     --- SALVAR ANTIGO---- 
+
   void _salvar() async {
     Boi boi = Boi.novo(_nomeController.text, _racaController.text,
         int.parse(_idadeController.text));
@@ -55,6 +59,22 @@ class _InserirBoiState extends State<InserirBoiPage> {
     } catch (exception) {
       showError(context, "Erro inserindo boi", exception.toString());
     }
+  }
+*/
+
+  void _salvar() async {
+    Database db = await ConennectionFactory.factory.database;
+    BoiDAO dao = BoiDAO(db);
+    Boi boi = Boi.novo(_nomeController.text, _racaController.text,
+        int.parse(_idadeController.text));
+    await dao.inserir(boi);
+    ConennectionFactory.factory.close();
+    _nomeController.clear();
+    _racaController.clear();
+    _idadeController.clear();
+
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text('Boi Salvo com sucesso.')));
   }
 
 //BUILDFORM

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:munick/dao/boi_dao.dart';
+import 'package:munick/dao/connection_factory.dart';
 import 'package:munick/main.dart';
 import 'package:munick/model/boi.dart';
 import 'package:munick/repositories/boi_repository.dart';
@@ -35,7 +37,7 @@ class _EditarBoiState extends State<EditarBoiPage> {
     _idadeController.text = this._boi!.idade.toString();
   }*/
   //OBTER NOVO - COM REST
-  void _obterBoi() async {
+  /*void _obterBoi() async {
     try {
       BoiRepository repository = BoiRepository();
       this._boi = await repository.buscar(this._id);
@@ -47,6 +49,22 @@ class _EditarBoiState extends State<EditarBoiPage> {
       Navigator.pop(context);
     }
   }
+        */
+
+//CRUD | editar_boi_page.dart
+
+  void _obterBoi() async {
+    Database db = await ConennectionFactory.factory.database;
+    BoiDAO dao = BoiDAO(db);
+    this._boi = await dao.obterPorId(this._id);
+
+    ConennectionFactory.factory.close();
+
+    _nomeController.text = this._boi.nome;
+    _nomeController.text = this._boi.raca;
+    _nomeController.text = this._boi.idade.toString();
+  }
+
 //SALVAR ANTIGO - SEM REST
   /* void _salvar() async {
     this._boi!.nome = _nomeController.text;
@@ -59,7 +77,7 @@ class _EditarBoiState extends State<EditarBoiPage> {
   */
 
 //SALVAR NOVO - COM REST
-  void _salvar() async {
+  /*void _salvar() async {
     this._boi!.nome = _nomeController.text;
     this._boi!.raca = _racaController.text;
     this._boi!.idade = int.parse(_idadeController.text);
@@ -70,9 +88,27 @@ class _EditarBoiState extends State<EditarBoiPage> {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Boi editado com sucesso')));
     } catch (exception) {
-      showError(context, "Erro esditando boi", exception.toString());
+      showError(context, "Erro editando boi", exception.toString());
     }
   }
+      */
+
+// CRUD | editar_boi_page.dart
+
+  void _salvar() async {
+    this._boi.nome = _nomeController.text;
+    this._boi.raca = _racaController.text;
+    this._boi.idade = int.parse(_idadeController.text);
+  }
+    Database db = await ConennectionFactory.factory.database;
+    BoiDAO dao = BoiDAO(db);
+    await dao.atualizar(this._boi!);
+
+    ConennectionFactory.factory.close();
+
+    ScaffoldMessenger.of(context).showSnackBar (SnackBar(content: Text ('Boi editado com sucesso.')));
+}
+
 
   Widget _buildForm(BuildContext context) {
     return Column(children: [
