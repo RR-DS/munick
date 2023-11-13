@@ -1,3 +1,4 @@
+
 /*
 250	boi_dao.dart
 250	boi_dao.dart |inserir		
@@ -6,7 +7,7 @@
 252	boi_dao.dart | atualizar		
 252	boi_dao.dart | remover.		
 */
-
+class Database {}
 
 // BOIDAO     PG 250
 class BoiDAO {
