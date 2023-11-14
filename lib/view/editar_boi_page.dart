@@ -7,10 +7,9 @@ import 'package:munick/repositories/boi_repository.dart';
 import '../helper/error.dart';
 
 class EditarBoiPage extends StatefulWidget {
-  static const String routeName = '/edit';
-
-  @override
-  _EditarBoiState createState() => _EditarBoiState();
+    static const String routeName = '/edit';
+      @override
+          _EditarBoiState createState() => _EditarBoiState();
 }
 
 class _EditarBoiState extends State<EditarBoiPage> {
@@ -207,4 +206,4 @@ class _EditarBoiState extends State<EditarBoiPage> {
   }
 
 
-//falta met show erro pg523
+//falta metodo show erro pg523

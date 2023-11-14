@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:munick/model/boi.dart';
 import 'package:munick/rest/boi_rest.dart';
 

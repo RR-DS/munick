@@ -1,6 +1,5 @@
 import 'package:munick/model/boi.dart';
-
-class Database {}
+import '../helper/error.dart';
 
 // BOIDAO     PG 250
 class BoiDAO {
