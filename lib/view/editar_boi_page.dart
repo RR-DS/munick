@@ -63,6 +63,17 @@ class _EditarBoiState extends State<EditarBoiPage> {
     _nomeController.text = this._boi.nome;
     _nomeController.text = this._boi.raca;
     _nomeController.text = this._boi.idade.toString();
+
+    try {
+      BoiRepository repository = BoiRepository();
+      this._boi = await repository.buscar(this._id);
+      _nomeController.text = this._boi!.nome;
+      _racaController.text = this._boi!.raca;
+      _idadeController.text = this._boi!.idade.toString();
+    } catch (exception) {
+      showError(context, "Erro recuperando boi", exception.toString());
+      Navigator.pop(context);
+    }
   }
 
 //SALVAR ANTIGO - SEM REST
@@ -194,8 +205,6 @@ class _EditarBoiState extends State<EditarBoiPage> {
       body: _buildForm(context),
     );
   }
-}
-
 
 
 //falta met show erro pg523
