@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:munick/dao/boi_dao.dart';
-import 'package:munick/dao/connection_factory.dart';
 import 'package:munick/main.dart';
 import 'package:munick/model/boi.dart';
 import 'package:munick/repositories/boi_repository.dart';
 import '../helper/error.dart';
 
 class EditarBoiPage extends StatefulWidget {
-    static const String routeName = '/edit';
-      @override
-          _EditarBoiState createState() => _EditarBoiState();
+  static const String routeName = '/edit';
+  @override
+  _EditarBoiState createState() => _EditarBoiState();
 }
 
 class _EditarBoiState extends State<EditarBoiPage> {
@@ -35,8 +33,9 @@ class _EditarBoiState extends State<EditarBoiPage> {
     _racaController.text = this._boi!.raca;
     _idadeController.text = this._boi!.idade.toString();
   }*/
+
   //OBTER NOVO - COM REST
-  /*void _obterBoi() async {
+  void _obterBoi() async {
     try {
       BoiRepository repository = BoiRepository();
       this._boi = await repository.buscar(this._id);
@@ -48,10 +47,9 @@ class _EditarBoiState extends State<EditarBoiPage> {
       Navigator.pop(context);
     }
   }
-        */
 
-//CRUD | editar_boi_page.dart
-
+//CRUD | editar_boi_page.dart//DAO
+/*
   void _obterBoi() async {
     Database db = await ConennectionFactory.factory.database;
     BoiDAO dao = BoiDAO(db);
@@ -74,7 +72,7 @@ class _EditarBoiState extends State<EditarBoiPage> {
       Navigator.pop(context);
     }
   }
-
+*/
 //SALVAR ANTIGO - SEM REST
   /* void _salvar() async {
     this._boi!.nome = _nomeController.text;
@@ -87,7 +85,7 @@ class _EditarBoiState extends State<EditarBoiPage> {
   */
 
 //SALVAR NOVO - COM REST
-  /*void _salvar() async {
+  void _salvar() async {
     this._boi!.nome = _nomeController.text;
     this._boi!.raca = _racaController.text;
     this._boi!.idade = int.parse(_idadeController.text);
@@ -101,24 +99,14 @@ class _EditarBoiState extends State<EditarBoiPage> {
       showError(context, "Erro editando boi", exception.toString());
     }
   }
-      */
 
-// CRUD | editar_boi_page.dart
-
+// CRUD | editar_boi_page.dart DAO
+/*
   void _salvar() async {
     this._boi.nome = _nomeController.text;
     this._boi.raca = _racaController.text;
     this._boi.idade = int.parse(_idadeController.text);
-  }
-    Database db = await ConennectionFactory.factory.database;
-    BoiDAO dao = BoiDAO(db);
-    await dao.atualizar(this._boi!);
-
-    ConennectionFactory.factory.close();
-
-    ScaffoldMessenger.of(context).showSnackBar (SnackBar(content: Text ('Boi editado com sucesso.')));
-}
-
+  }  */
 
   Widget _buildForm(BuildContext context) {
     return Column(children: [
@@ -204,6 +192,6 @@ class _EditarBoiState extends State<EditarBoiPage> {
       body: _buildForm(context),
     );
   }
-
+}
 
 //falta metodo show erro pg523

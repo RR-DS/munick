@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:munick/dao/boi_dao.dart';
-import 'package:munick/dao/connection_factory.dart';
 import 'package:munick/main.dart';
 import 'package:munick/model/boi.dart';
 import 'package:munick/repositories/boi_repository.dart';
@@ -16,6 +14,7 @@ class ListarBoisPage extends StatefulWidget {
 
 class _ListarBoisState extends State<ListarBoisPage> {
   List<Boi> _lista = <Boi>[];
+
 //REFRESHLIST
   @override
   void initState() {
@@ -36,38 +35,34 @@ class _ListarBoisState extends State<ListarBoisPage> {
       _lista = tempList;
     });
   }
+
 //OBTERTODOS
-
   Future<List<Boi>> _obterTodos() async {
-    //Banco de dados buscar as Informações
-    Database db = await ConennectionFactory.factory.database;
-    BoiDAO = Boi(db);
-
-    List<Boi> tempLista = await dao.obterTodos();
-    ConennectionFactory.factory.close();
-
-    /*List<Boi> tempLista = <Boi>[];
+    List<Boi> tempLista = <Boi>[];
     try {
       BoiRepository repository = BoiRepository();
       tempLista = await repository.buscarTodos();
     } catch (exception) {
       showError(context, "Erro obtendo lista de bois", exception.toString());
-    }*/
+    }
 
     return tempLista;
-
-    //<Boi>[
-    //  Boi(1, "nome", "raca", 10), //dar uma olhada aqui
-    //];
   }
+/*
+OBTERTODOS-SQLITE-DAOECONECTION
+//Banco de dados buscar as Informações
+    Database db = await ConennectionFactory.factory.database;
+    BoiDAO = Boi(db);
+
+    List<Boi> tempLista = await dao.obterTodos();
+    ConennectionFactory.factory.close();
+*/
+  //<Boi>[
+  //Boi(1, "nome", "raca", 10), //dar uma olhada aqui
+  //];
 
 //REMOVEBOI
   void _removerBoi(int id) async {
-    Database db = await ConennectionFactory.factory.database;
-    BoiDAO dao = BoiDAO(db);
-    await dao.remover(id);
-    /*
-
     try {
       BoiRepository repository = BoiRepository();
       await repository.remover(id);
@@ -76,12 +71,18 @@ class _ListarBoisState extends State<ListarBoisPage> {
     } catch (exception) {
       showError(context, "Erro removendo boi", exception.toString());
     }
-*/
-    ConennectionFactory.factory.close();
   }
+//REMOVEBOI-SQLITE-DAOECONECTION
+/*
+Database db = await ConennectionFactory.factory.database;
+    BoiDAO dao = BoiDAO(db);
+    await dao.remover(id);
+
+ConennectionFactory.factory.close();
+*/
 
 //SHOWITEM ANTIGO
-/*
+
   void _showItem(BuildContext context, int index) {
     Boi boi = _lista[index];
     showDialog(
@@ -105,10 +106,9 @@ class _ListarBoisState extends State<ListarBoisPage> {
               ]);
         }));
   }
-*/
 
-//SHOWITEM NOVO
-  void _showItem(BuildContext context, int index) {
+//SHOWITEM NOVO DAO
+/*  void _showItem(BuildContext context, int index) {
     Boi boi = _lista[index];
     showDialog(
         context: context,
@@ -142,7 +142,7 @@ class _ListarBoisState extends State<ListarBoisPage> {
               ]);
         });
   }
-
+*/
 //EDITITEM
   void _editItem(BuildContext context, int index) {
     Boi b = _lista[index];
