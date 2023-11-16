@@ -3,5 +3,5 @@
 }
 */
 class Api {
-  static final String endpoint = "localhost:8080";
+  static final String endpoint = "localhost:3000";
 }

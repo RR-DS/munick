@@ -42,6 +42,6 @@ class Boi {
 
   String toJson() => jsonEncode(toMap());
 }
-//POR FROM MAP E TOP MAP
+//POR FROM MAP E TO MAP
 //CRUD_BOI 
 //FAZER

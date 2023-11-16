@@ -66,7 +66,8 @@ class BoiRest {
       'Content-Type': 'application/json; charset=UTF-8',
     });
     if (response.statusCode == 200) {
-      return Boi.fromJson(response.body);
+      //return Boi.fromJson(response.body);
+      return Boi();
     } else {
       throw Exception('Erro removido boi: $id.');
     }
