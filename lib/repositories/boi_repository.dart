@@ -17,7 +17,7 @@ class BoiRepository {
   }
 
   Future<Boi> alterar(Boi boi) async {
-    return await api.inserir(boi);
+    return await api.alterar(boi);
   }
 
   Future<Boi> remover(int id) async {

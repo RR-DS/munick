@@ -23,6 +23,12 @@
       "boi_nome": "Pimpolho",
       "boi_raca": "Zebu",
       "boi_idade": 2
+    },
+    {
+      "boi_id": 5,
+      "boi_nome": "Novo",
+      "boi_raca": "Mesma",
+      "boi_idade": 1
     }
   ]
 }
