@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "274808701745",
+    "project_id": "munick-24057",
+    "storage_bucket": "munick-24057.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274808701745:android:ffbd07e1acffdfe674a610",
+        "android_client_info": {
+          "package_name": "com.example.munick"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5uSbHSzfpvAQywl0yMqZqhnvMl1QeyYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
